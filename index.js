@@ -4,8 +4,10 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
 const inquirer = require('inquirer');
+const teamMembers = [];
 
-const promptUser = () => {
+const addManager = () => {
+    
     return inquirer.prompt ([
       {
         type: 'input',
@@ -13,6 +15,7 @@ const promptUser = () => {
         message: "What is the team manager's name? (Required)",
         validate: nameInput => {
           if (nameInput) {
+            //oMgr.name = nameInput;
             return true;
           } else {
             console.log("What is the team manager's name?");
@@ -22,7 +25,7 @@ const promptUser = () => {
       },
       {
         type: 'input',
-        name: 'name',
+        name: 'idInput',
         message: "What is the team manager's employee ID? (Required)",
         validate: idInput => {
           if (idInput) {
@@ -35,7 +38,7 @@ const promptUser = () => {
       },
       {
         type: 'input',
-        name: 'name',
+        name: 'email',
         message: "What is the team manager's email? (Required)",
         validate: email => {
           if (email) {
@@ -48,7 +51,7 @@ const promptUser = () => {
       },
       {
         type: 'input',
-        name: 'name',
+        name: 'officeNumber',
         message: "What is the team manager's office number? (Required)",
         validate: officeNumber => {
           if (officeNumber) {
@@ -59,11 +62,38 @@ const promptUser = () => {
           }
         }
       }
-
+    //   ,
+    //     {
+    //     type: 'rawlist',
+    //     name: 'newTeamMemberType',
+    //     message: 'Please make a choice from the options below',
+    //     choices: ['Add a new engineer', 'Add a new intern', 'Finish building team']
+    //   }
     ])
+    .then (memberData => {
+        //teamMembers.push(memberData)
+        let oMgr = new Manager(memberData.name, memberData.idInput, memberData.email, memberData.officeNumber);
+        teamMembers.push (oMgr);
+        console.log(teamMembers)
+      }
+    )
+    
+   
+}
+
+const addTeamMember = (memberChoiceID) => {
+    return inquirer.prompt ([
+      {
+        type: 'rawlist',
+        name: 'newTeamMemberType',
+        message: 'Please make a choice from the options below',
+        choices: ['Add a new engineer', 'Add a new intern', 'Finish building team']
+      }
+    ]);
 }
 
 
+addManager()
 // const employee = new Employee('Ravnish Gupta', 123, 'email@gmail.com');
 // const manager = new Manager('manager', 'mng12', 'mng@gmail.com', 12);
 // const intern = new Intern('intern', 'int123', 'int@email.com', 'NYU')
