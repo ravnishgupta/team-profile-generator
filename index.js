@@ -1,7 +1,8 @@
-const Employee = require('./lib/Employee');
+//const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const generateTeam = require("./src/team-template");
 
 const inquirer = require('inquirer');
 const teamMembers = [];
@@ -80,8 +81,7 @@ const addManager = () => {
                 addIntern();
                 break;
             case 'FINISH BUILDING TEAM':
-                console.log(teamMembers);
-                break;
+              generateTeam(teamMembers);
         }
        }
     )
@@ -231,10 +231,13 @@ const presentChoices = () => {
                 addIntern();
                 break;
             case 'FINISH BUILDING TEAM':
-                console.log(teamMembers)
-                break;
+              generateTeam(teamMembers);
         }
     })
 }
 addManager()
+// .then(teamMembers => {
+//   console.log(teamMembers)
+//   //return generateTeam(teamMembers)
+// })
 
