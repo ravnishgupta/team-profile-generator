@@ -15,7 +15,6 @@ const addManager = () => {
         message: "What is the team manager's name? (Required)",
         validate: nameInput => {
           if (nameInput) {
-            //oMgr.name = nameInput;
             return true;
           } else {
             console.log("What is the team manager's name?");
@@ -61,27 +60,160 @@ const addManager = () => {
             return false;
           }
         }
+      },
+      {
+        type: 'rawlist',
+        name: 'nextStep',
+        message: 'Please make a choice from the options below',
+        choices: ['Add a new engineer', 'Add a new intern', 'Finish building team']
       }
-    //   ,
-    //     {
-    //     type: 'rawlist',
-    //     name: 'newTeamMemberType',
-    //     message: 'Please make a choice from the options below',
-    //     choices: ['Add a new engineer', 'Add a new intern', 'Finish building team']
-    //   }
     ])
     .then (memberData => {
         //teamMembers.push(memberData)
         let oMgr = new Manager(memberData.name, memberData.idInput, memberData.email, memberData.officeNumber);
         teamMembers.push (oMgr);
-        console.log(teamMembers)
-      }
+        switch (memberData.nextStep.toUpperCase()) {
+            case 'ADD A NEW ENGINEER':
+                addEngineer();
+                break;
+            case 'ADD A NEW INTERN':
+                addIntern();
+                break;
+            case 'FINISH BUILDING TEAM':
+                console.log(teamMembers);
+                break;
+        }
+       }
     )
-    
-   
 }
 
-const addTeamMember = (memberChoiceID) => {
+const addIntern = () => {
+    return inquirer.prompt ([
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the intern's name? (Required)",
+            validate: nameInput => {
+              if (nameInput) {
+                return true;
+              } else {
+                console.log("What is the intern's name?");
+                return false;
+              }
+            }
+          },
+          {
+            type: 'input',
+            name: 'idInput',
+            message: "What is the intern's employee ID? (Required)",
+            validate: idInput => {
+              if (idInput) {
+                return true;
+              } else {
+                console.log("What is the intern's employee ID?");
+                return false;
+              }
+            }
+          },
+          {
+            type: 'input',
+            name: 'email',
+            message: "What is the intern's email? (Required)",
+            validate: email => {
+              if (email) {
+                return true;
+              } else {
+                console.log("What is the intern's email?");
+                return false;
+              }
+            }
+          },
+          {
+            type: 'input',
+            name: 'school',
+            message: "What is the intern's school? (Required)",
+            validate: school => {
+              if (school) {
+                return true;
+              } else {
+                console.log("What is the intern's school?");
+                return false;
+              }
+            }
+          }
+     ])
+     .then(internData => {
+         let oIntern = new Intern(internData.name, internData.idInput, internData.email, internData.school);
+         teamMembers.push(oIntern);
+         presentChoices();
+       }
+     )
+}
+
+const addEngineer = () => {
+    return inquirer.prompt ([
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the engineer's name? (Required)",
+            validate: nameInput => {
+              if (nameInput) {
+                return true;
+              } else {
+                console.log("What is the engineer's name?");
+                return false;
+              }
+            }
+          },
+          {
+            type: 'input',
+            name: 'idInput',
+            message: "What is the engineer's employee ID? (Required)",
+            validate: idInput => {
+              if (idInput) {
+                return true;
+              } else {
+                console.log("What is the engineer's employee ID?");
+                return false;
+              }
+            }
+          },
+          {
+            type: 'input',
+            name: 'email',
+            message: "What is the engineer's email? (Required)",
+            validate: email => {
+              if (email) {
+                return true;
+              } else {
+                console.log("What is the engineer's email?");
+                return false;
+              }
+            }
+          },
+          {
+            type: 'input',
+            name: 'github',
+            message: "What is the engineer's github? (Required)",
+            validate: github => {
+              if (github) {
+                return true;
+              } else {
+                console.log("What is the engineer's github?");
+                return false;
+              }
+            }
+          }
+     ])
+     .then(engData => {
+        let oEng = new Engineer(engData.name, engData.idInput, engData.email, engData.github)
+        teamMembers.push (oEng);
+        presentChoices();
+     })
+     
+}
+
+const presentChoices = () => {
     return inquirer.prompt ([
       {
         type: 'rawlist',
@@ -89,17 +221,20 @@ const addTeamMember = (memberChoiceID) => {
         message: 'Please make a choice from the options below',
         choices: ['Add a new engineer', 'Add a new intern', 'Finish building team']
       }
-    ]);
+    ])
+    .then(choice => {
+        switch (choice.newTeamMemberType.toUpperCase()) {
+            case 'ADD A NEW ENGINEER':
+                addEngineer();
+                break;
+            case 'ADD A NEW INTERN':
+                addIntern();
+                break;
+            case 'FINISH BUILDING TEAM':
+                console.log(teamMembers)
+                break;
+        }
+    })
 }
-
-
 addManager()
-// const employee = new Employee('Ravnish Gupta', 123, 'email@gmail.com');
-// const manager = new Manager('manager', 'mng12', 'mng@gmail.com', 12);
-// const intern = new Intern('intern', 'int123', 'int@email.com', 'NYU')
-
-// console.log(employee.getEmail())
-// console.log(manager.getOfficeNumber());
-// console.log(intern.getSchool())
-// console.log(intern.getRole(),manager.getRole(), employee.getRole(),)
 
