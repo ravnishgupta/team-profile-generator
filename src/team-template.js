@@ -1,3 +1,5 @@
+const writeFile = require('./generate-site');
+
 const generateTeam = teamArr => {
     let teamHTML = `<!DOCTYPE html>
     <html lang="en">
@@ -39,7 +41,7 @@ const generateTeam = teamArr => {
                 </main>
                 </body>
                 </html>`
-    console.log(teamHTML)
+    return(writeFile(teamHTML));
 }
 
 module.exports = generateTeam;
