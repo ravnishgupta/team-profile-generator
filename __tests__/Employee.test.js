@@ -30,40 +30,11 @@ describe('Employee', () => {
       it('should throw an error if not provided an email address', () => {
         const cb = () => new Employee('Sarah', 1);
         const err = new Error(
-          "Expected parameter 'email address' to be a not blank"
+          "Invalid email"
         );
   
         expect(cb).toThrowError(err);
       });
     });
 });
-  
-    //   it("should throw an error if 'name' is not a string", () => {
-    //     const cb = () => new Employee(3, 2);
-    //     const err = new Error(
-    //       "Expected parameter 'name' to be a non-empty string"
-    //     );
-  
-    //     expect(cb).toThrowError(err);
-    //   });
-  
-    //   it("should throw an error if 'email' is not a number", () => {
-    //     const cb = () => new Child('Sarah', '2');
-    //     const err = new Error(
-    //       "Expected parameter 'age' to be a non-negative number"
-    //     );
-  
-    //     expect(cb).toThrowError(err);
-    //   });
-  
-    //   it("should throw an error if 'age' is less than 0", () => {
-    //     const cb = () => new Child('Sarah', -1);
-    //     const err = new Error(
-    //       "Expected parameter 'age' to be a non-negative number"
-    //     );
-  
-//         expect(cb).toThrowError(err);
-//       });
-//     });
-//  });
   
