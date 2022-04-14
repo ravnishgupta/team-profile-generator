@@ -48,5 +48,6 @@ THEN I exit the application, and the HTML is generated
 
 ## Technologies Used:
 - Node.js
-- Jest
+- Inquirer package
+- Jest package
 - Object Oriented Programmign using Javascript
