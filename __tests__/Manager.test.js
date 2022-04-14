@@ -3,10 +3,10 @@ const Manager = require('../lib/Manager');
 describe('Manager', () => {
     describe('Initialization', () => {
       it('should create an object with a name, ID, email and school if provided valid arguments', () => {
-        const manager = new Manager('John Smith', 123, 'test@test.com' , '123ABC')
+        const manager = new Manager('John Smith', '123', 'test@test.com' , '123ABC')
   
         expect(manager.name).toEqual('John Smith');
-        expect(manager.id).toEqual(123);
+        expect(manager.id).toEqual('123');
         expect(manager.email).toEqual('test@test.com');
         expect(manager.officeNumber).toEqual('123ABC');
       });
@@ -15,6 +15,15 @@ describe('Manager', () => {
         const cb = () => new Manager();
   
         expect(cb).toThrow();
+      });
+
+      it('should throw an error if not provided a name', () => {
+        const cb = () => new Manager('');
+        const err = new Error(
+          "Expected parameter 'name' to be a non-empty string"
+        );
+  
+        expect(cb).toThrowError(err);
       });
   
       it('should throw an error if not provided an ID', () => {
@@ -27,7 +36,7 @@ describe('Manager', () => {
       });
 
       it('should throw an error if not provided an email address', () => {
-        const cb = () => new Manager('Sarah', 1);
+        const cb = () => new Manager('Sarah', '1');
         const err = new Error(
           "Invalid email"
         );
@@ -36,7 +45,7 @@ describe('Manager', () => {
       });
 
       it('should throw an error if not provided an office number', () => {
-        const cb = () => new Manager('Sarah', 1, 'test@test.com');
+        const cb = () => new Manager('Sarah', '1', 'test@test.com');
         const err = new Error(
           "Invalid office number"
         );

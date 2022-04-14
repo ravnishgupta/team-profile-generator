@@ -4,10 +4,10 @@ const Engineer = require('../lib/Engineer');
 describe('Engineer', () => {
     describe('Initialization', () => {
       it('should create an object with a name, ID, email and github if provided valid arguments', () => {
-        const engineer = new Engineer('John Smith', 123, 'test@test.com' , 'github')
+        const engineer = new Engineer('John Smith', '123', 'test@test.com' , 'github')
   
         expect(engineer.name).toEqual('John Smith');
-        expect(engineer.id).toEqual(123);
+        expect(engineer.id).toEqual('123');
         expect(engineer.email).toEqual('test@test.com');
         expect(engineer.github).toEqual('github');
       });
@@ -16,6 +16,15 @@ describe('Engineer', () => {
         const cb = () => new Engineer();
   
         expect(cb).toThrow();
+      });
+
+      it('should throw an error if not provided a name', () => {
+        const cb = () => new Engineer('');
+        const err = new Error(
+          "Expected parameter 'name' to be a non-empty string"
+        );
+  
+        expect(cb).toThrowError(err);
       });
   
       it('should throw an error if not provided an ID', () => {
@@ -28,7 +37,7 @@ describe('Engineer', () => {
       });
 
       it('should throw an error if not provided an email address', () => {
-        const cb = () => new Engineer('Sarah', 1);
+        const cb = () => new Engineer('Sarah', '1');
         const err = new Error(
           "Invalid email"
         );
@@ -37,7 +46,7 @@ describe('Engineer', () => {
       });
 
       it('should throw an error if not provided a github account', () => {
-        const cb = () => new Engineer('Sarah', 1, 'test@test.com');
+        const cb = () => new Engineer('Sarah', '1', 'test@test.com');
         const err = new Error(
           "Invalid github account"
         );
