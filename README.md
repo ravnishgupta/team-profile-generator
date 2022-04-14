@@ -50,4 +50,4 @@ THEN I exit the application, and the HTML is generated
 - Node.js
 - Inquirer package
 - Jest package
-- Object Oriented Programmign using Javascript
+- Object Oriented Programming using Javascript
