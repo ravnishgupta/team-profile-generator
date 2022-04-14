@@ -12,9 +12,10 @@ Once you have entered all the details, an HTML file is generated that displays a
 ## Screenshots
 
 ### Input:
+![Image](./images/input.png "Node input")
 
 ### Output:
-[Image](./images/team-roster.png "Team Roster")
+![Image](./images/team-roster.png "Team Roster")
 
 ## User Story
 ```
